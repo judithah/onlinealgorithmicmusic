@@ -1,37 +1,48 @@
 <!DOCTYPE html>
+
 <html>
-<head> 
-    <link rel="stylesheet" href="webpagestyle.css">
-</head>
-<body>
+    <head> 
+        <link rel="stylesheet" href="webpagestyle.css">
+        
+    </head>
+    <body>
+        
+        <!-- HTML for the "enter screen" -->
+        <section id="curtain">
+    
+            <button><img src="giphy.webp" id="enter"></button>
+            <h1>hey</h1>
+        </section>
 
-      <!-- HTML for the "enter screen" -->
-      <section id="curtain">
-        <button id="enter">ENTER</button>
-      </section>
+        <div class="colored-page"> 
 
+        <!-- javascript usually goes towards the bottom  -->
+        <!-- 4 buttons on page -->
+        <div class="button-container">
 
-      <!-- import libraries -->
-      <script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js"></script>
-      <script src="https://tonejs.github.io/build/Tone.js"></script>
-      <script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js"></script>
+            <button class="topLeft" id="topLeft">
+            <img src = 'giphy-2.gif'>
+            </button>
 
+            <button class="topRight" id="topRight">
+            <img src = 'pastry.gif'>
+            </button>
 
-<div class="colored-page"> 
+            <button class="bottomLeft" id="bottomLeft">
+            <img src = 'marshmellowcoffee.gif'>
+            </button>
 
+            <button class="bottomRight" id="bottomRight">
+            <img src = 'tea.gif'>
+            </button>
 
-<!-- javascript usually goes towards the bottom  -->
-<!-- 4 buttons on page -->
-<div class="button-container">
-    <button class="topLeft" id="topLeft">Top Left</button>
-    <button class="topRight" id="topRight">Top Right</button>
-    <button class="bottomLeft" id="bottomLeft">Bottom Left</button>
-    <button class="bottomRight" id="bottomRight">Bottom Right</button>
-</div>
+            <input type="text" id="userInput" class="textBox" placeholder="          Change the Tempo...">
+            
+        </div>
 
-<script src="https://tonejs.github.io/build/Tone.js"></script>
-<script src="main.js"></script>
+        <script src="https://tonejs.github.io/build/Tone.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js"></script>
+        <script src="main.js"></script>
 
-
-</body>
+    </body>
 </html>

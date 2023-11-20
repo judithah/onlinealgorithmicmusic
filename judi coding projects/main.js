@@ -1,149 +1,126 @@
-
-// !!!!!! pls do not mind the notes, it is for my understanding
-// also pls do not mind the ugliness of the page, i am working on making it pretty
-//  and functional but i want to fix my audio component first! thanks
-// - judi
-
-
-let counterOne = 0
-let counterTwo = 0
-let counterThree = 0
-let counterFour = 0
-
-let isTransportStartedOne = false;
-let isTransportStartedTwo = false;
-let isTransportStartedThree = false;
-let isTransportStartedFour = false;
-
-
-
-// Define separate toggle functions for each quadrant
-function toggleOne() {
-    if (isTransportStartedOne) {
-        Tone.Transport.stop();
-        isTransportStartedOne = false;
-    } else {
-        Tone.Transport.start();
-        isTransportStartedOne = true;
-    }
-}
-
-function toggleTwo() {
-    if (isTransportStartedTwo) {
-        Tone.Transport.stop();
-        isTransportStartedTwo = false;
-    } else {
-        Tone.Transport.start();
-        isTransportStartedTwo = true;
-    }
-}
-
-function toggleThree() {
-    if (isTransportStartedThree) {
-        Tone.Transport.stop();
-        isTransportStartedThree = false;
-    } else {
-        Tone.Transport.start();
-        isTransportStartedThree = true;
-    }
-}
-
-function toggleFour() {
-    if (isTransportStartedFour) {
-        Tone.Transport.stop();
-        isTransportStartedFour = false;
-    } else {
-        Tone.Transport.start();
-        isTransportStartedFour = true;
-    }
-}
-
-// BPM of the notes in the arrays
-Tone.Transport.bpm.value = 45;
-
+/* global tone, nn */
 // a Tone.js synthesizer is created and connected to the default audio destination
 const synth = new Tone.Synth().toDestination()
 synth.volume.value = 0 // volume in decibals
 
+// using tone.js freeverb to add reverb
+const reverb = new Tone.Freeverb().toDestination()
+synth.connect(reverb)
+reverb.dampening.value = 2000
+
+const delay = new Tone.FeedbackDelay('8n', 0.5).toDestination();
+synth.connect(delay)
+
+// BPM of the notes in the arrays
+Tone.Transport.bpm.value = 120
+
+
+// initial variables.................................
+const state = {
+    counter: 0,
+    quad: null, // 0, 1, 2, 3 for quadrants clock-wise starting from top left
+    notes: [
+        ['C3', 'E3', 'G3', 'B3'],
+        ['D3', 'F3', 'A3', 'C3#'],
+        ['E3', 'G3', 'B3', 'D3'],
+        ['A3', 'C3', 'E3', 'G3']
+    ],
+    lens: [
+        '4n',
+        '8n',
+        '8n',
+        '8n',
+    ]
+}
+
 // these are arrays, use different notes for each quadrant!
 const notesTopLeft = ['C3', 'E3', 'G3', 'B3']
-
-const notesTopRight = ['D3', 'F3', 'A3', 'C3s']
-
+const notesTopRight = ['D3', 'F3', 'A3', 'C3#']
 const notesBottomRight = ['E3', 'G3', 'B3', 'D3']
-
 const notesBottomLeft= ['A3', 'C3', 'E3', 'G3']
 
-// I have four functions that correspond to each quadrant I will be playing music from
 
-function playOne (time) {
-    const notes = notesTopLeft[counterOne % notesTopLeft.length]
-    synth.triggerAttackRelease(notes, '4n', time)
-    counterOne++; // increase counter by 1
-    // this schedules the release of the note after the specified duration
+// getting the textbox element
 
-}
- 
-function playTwo (time) {
-    const notesTwo = notesTopRight[counterTwo % notesTopRight.length]
-    synth.triggerAttackRelease(notesTwo, '8n', time)
-    counterTwo++ // increase counter by 1
+const userInput = document.getElementById('userInput')
+console.log(userInput)
 
+const textBox = document.querySelector('.textBox');
 
-}
+// functions........................................
 
-function playThree (time) {
-    const notesThree = notesBottomRight[counterThree % notesBottomRight.length]
-    synth.triggerAttackRelease(notesThree, '8n', time)
-    counterThree++ // increase counter by 1
+function play (time) {
+    if (state.quad !== null) {
+        const notes = state.notes[state.quad]
+        const n = notes[state.counter % notes.length]
+        const l = state.lens[state.quad]
+        synth.triggerAttackRelease(n, l, time)
+        console.log('just played', n,l)
+    }
+    state.counter++ 
+    // increases state counter by 1 
 }
 
-function playFour (time) {
-    const notesFour = notesBottomLeft[counterFour % notesBottomLeft.length]
-    synth.triggerAttackRelease(notesFour, '8n', time)
-    counterFour++ // increase counter by 1
-
-
-}
-
-// this code contains functions that run the arrays in a specified amount of 
-// time
-
-  
-Tone.Transport.scheduleRepeat(time => playOne(time), '8n')
-const topLeft= document.getElementById('topLeft');
-topLeft.addEventListener('click', toggle);
-
-Tone.Transport.scheduleRepeat(time => playTwo(time), '8n')
-const topRight= document.getElementById('topRight');
-topRight.addEventListener('click', toggle);
-
-Tone.Transport.scheduleRepeat(time => playThree(time), '8n')
-const bottomLeft= document.getElementById('bottomLeft');
-bottomLeft.addEventListener('click', toggle);
-
-Tone.Transport.scheduleRepeat(time => playFour(time), '8n')
-const bottomRight= document.getElementById('bottomRight');
-bottomRight.addEventListener('click', toggle);
-
-
-
-
-// controls the playback of your audio, whether its started or not
-// it starts or stops the metronome
-function toggle () {
-    if (Tone.Transport.state === 'started') {
-    Tone.Transport.stop()
+function quadClick (idx) {
+    if (state.quad === idx) {
+        Tone.Transport.stop()
+        console.log('stopped playing')
     } else {
-    Tone.Transport.start()
+        state.quad = idx;
+        Tone.Transport.start()
+        console.log('playing quad', state.quad, state.notes[state.quad])
+    }
+
+}
+
+function update(e) {
+    // Adjust the reverb parameters based on cursor position
+    const xPercentage = e.x / nn.width;
+    const yPercentage = e.y / nn.height;
+
+    reverb.dampening.value = nn.map(xPercentage, 0, 0.2, 0.1, 0.2); // Adjust dampening based on x position
+    reverb.roomSize.value = nn.map(yPercentage, 0, 0.2, 0.1, 0.2); // Adjust room size based on y position
+
+    delay.delayTime.value = nn.map(xPercentage, 0, 0.3, 0, 0.2); // Adjust delay time based on x position
+    delay.feedback.value = nn.map(yPercentage, 0, 0.3, 0.1, 0.2); // Adjust feedback based on y position
+}
+
+
+function updateTempoOnCharacterCount () {
+    const characterCount = userInput.value.length
+
+    if (characterCount > 0 && characterCount % 50 === 0) {
+        const characterCountMultipleOf50 = Math.floor(characterCount /50)
+        const newTempo = Math.max(50, 90 - (characterCountMultipleOf50 * 20))
+        Tone.Transport.bpm.value = newTempo
+
+        if (newTempo < 50) {
+            Tone.Transport.stop()
+        }
     }
 }
-// BPM of the notes in the arrays
 
+if (userInput) {
+    userInput.addEventListener('input', updateTempoOnCharacterCount) }
+    else{
+        console.error('could not find the element with id userinput')
+    }
+
+// event listeners............................................
+nn.on('mousemove', update);
+
+nn.getAll('.button-container > button').forEach((ele, idx) => { 
+    ele.on('click', () => quadClick(idx))
+    })
+  
+Tone.Transport.scheduleRepeat(time => play(time), '8n')
 
  // to capture the user's "permission" to play sound algorithmically
  nn.get('#enter').on('click', async () => {
     await Tone.start() // to restart AudioContext in Tone.js
     nn.get('#curtain').css({ display: 'none' }) // hide curtain
   })
+  
+userInput.addEventListener('input', updateTempoOnCharacterCount)
+
 
