@@ -161,11 +161,11 @@ button {
 }
 
 .typewriter .line2 {
-    overflow: hidden; /* Hide overflow to create a typing effect */
-    border-right: 0.15em solid orange; /* Create a cursor effect */
-    white-space: nowrap; /* Prevent text from wrapping */
-    margin: 0; /* Remove default margins */
-    letter-spacing: 0.15em; /* Adjust letter spacing for a retro look */
+    overflow: hidden; 
+    border-right: 0.15em solid orange; 
+    white-space: nowrap;
+    margin: 0; 
+    letter-spacing: 0.15em; 
     animation: typing2 5s steps(40, end), blink-caret 0.75s step-end infinite;
 }
 
