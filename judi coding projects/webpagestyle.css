@@ -6,8 +6,10 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    transition: background 0.5s ease;
+    overflow: hidden;
 }
+
+
 
 * {
     box-sizing: border-box;
@@ -20,23 +22,48 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(154, 107, 202, 0.704)
+    background-color: rgba(252, 134, 187, 0.704)
   }
     #enter {
-    height: 120px;
+    height: 190px;
+    transform: translate(-0%, -80%);
     }
-  #enter:hover {
-    background-color: rgb(231, 235, 222);
-  }
+  
+   #curtain h1{
+    color: #ffffff;
+    position: absolute;
+    top: 5%;
+   }
+
+   #curtain h3{
+    color: #ffffff;
+    position: absolute;
+    top: 10%;
+    font-weight: 300;
+    }
+
+    #curtain #directions-text {
+    font-size: 24px;
+    top: 55%;
+    position: absolute;
+    }
+
+    #curtain #directionsparagraph {
+        font-size: 20px;
+        top: 60%;
+        position: absolute;
+        }
+
 
 
 /* second page/ colored page:  */
 /* this sets the background color */
 
 .colored-page:hover {
-    background: rgb(242, 177, 210); 
+    background: rgb(132, 242, 143); 
 
 }
 
@@ -58,8 +85,8 @@ button {
 .colored-page {
     width: 100%;
     height: 100%;
-    background: #ffb685; /* Initial background color */
-    transition: background 15s ease; /* Smooth transition on hover */
+    background: #f2b3e7; /* Initial background color */
+    transition: background 10s ease; /* Smooth transition on hover */
 
 }
 
@@ -69,16 +96,18 @@ button {
     width: 100%;
     height: 25%;
     background-color: rgba(0, 0, 0, 0);
-    font-size: 50px
+    font-size: 40px;
+    font-family:'Times New Roman', Times, serif;
+    color: rgb(255, 255, 255);
 }
 
 .topLeft {
     top: 41%;
-    right: 40%
+    right: 50%;
 }
 
 .topLeft img {
-    width: 23%; /* Adjust the percentage to make the image smaller */
+    width: 40%; /* Adjust the percentage to make the image smaller */
     height: auto; 
 }
 
@@ -120,4 +149,50 @@ button {
 }
 
 
-  
+  /* Type writer effect */
+
+.typewriter .line1 {
+  overflow: hidden; /* Hide overflow to create a typing effect */
+  border-right: 0.15em solid orange; /* Create a cursor effect */
+  white-space: nowrap; /* Prevent text from wrapping */
+  margin: 0; /* Remove default margins */
+  letter-spacing: 0.15em; /* Adjust letter spacing for a retro look */
+  animation: typing1 8s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+.typewriter .line2 {
+    overflow: hidden; /* Hide overflow to create a typing effect */
+    border-right: 0.15em solid orange; /* Create a cursor effect */
+    white-space: nowrap; /* Prevent text from wrapping */
+    margin: 0; /* Remove default margins */
+    letter-spacing: 0.15em; /* Adjust letter spacing for a retro look */
+    animation: typing2 5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing1 {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes typing2 {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: orange;
+  }
+}
