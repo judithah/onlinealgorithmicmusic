@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+    <head> 
+        <link rel="stylesheet" href="webpagestyle.css">
+    </head>
+    <body>
+        
+        <!-- notes for my understanding:D -->
+
+        <!-- this section tag is for the curtain with the entrance hellokitty image and welcome text-->
+        <section id="curtain" class="typewriter">
+            <button><img src="giphy.webp" id="enter"></button>
+            <h1 class="line1">Welcome to the Sanrio Instrumental Cafe!</h1>
+            <h3 class="line2"> My name is Hello Kitty and I will be assisting you today. Does your coffee or
+                <br>
+                pastry ever contain an absurd amount of reverb and delay? Or, none at  all? <br>
+                I truly hate when this happens!
+                <br>
+                <br>
+                Luckily, at the SI Cafe you can customize your purchases to YOUR liking. <br>
+                Yippeeeee!
+            </h3>
+            <h1 class="line3" id = "directions-text"> Menu Directions:</h1>
+            <h3 class="line4" id="directionsparagraph"> 1. Choose one of the 4 delicious options! (all
+            are served at starting 120bpm)<br>
+            - if you would like to lower the tempo, feel free to tell me about your day in the text box! :)<br>
+            <br> 
+            2. To increase the quantity of reverb and Delay:<br>
+            -  move your cursor towards the bottom left to increase the reverb<br>
+            - move your cursor to the top right to increase the delay! <br>
+            - be sure to play around with the settings to get cool effects! <br>
+            <br>
+            3. CLICK ME TO GET STARTED!!! and refresh to restart:D
+            </h3>
+        </section>
+
+        <!-- this class identifies the colored page, which contains four different images/gifs that once clicked,
+        trigger and arpegiatted chord -->
+        <div class="colored-page"> 
+
+        <!-- 4 different buttons/images on "colored page" -->
+        <div class="button-container">
+
+            <button class="topLeft" id="topLeft">
+            <img src = 'giphy-2.gif'>
+            </button>
+
+            <button class="topRight" id="topRight">
+            <img src = 'pastry.gif'>
+            </button>
+
+            <button class="bottomLeft" id="bottomLeft">
+            <img src = 'marshmellowcoffee.gif'>
+            </button>
+
+            <button class="bottomRight" id="bottomRight">
+            <img src = 'tea.gif'>
+            </button>
+
+            <input type="text" id="userInput" class="textBox" placeholder="what can i get you :D ...?">
+            
+        </div>
+
+        <!-- tip: javascript libraries go towards the bottom -->
+        <script src="https://tonejs.github.io/build/Tone.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js"></script>
+        <script src="main.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,187 @@
+/* code pertaining to the whole body element of my html code */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+* {
+    box-sizing: border-box;
+  }
+
+/* code for the first page/curtain page */
+
+#curtain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(252, 134, 187, 0.704)
+  }
+    #enter {
+    height: 190px;
+    transform: translateY(-80%);
+    z-index: 1000;
+    }
+  
+   #curtain h1{
+    color: #ffffff;
+    position: absolute;
+    top: 5%;
+   }
+
+   #curtain h3{
+    color: #ffffff;
+    position: absolute;
+    top: 10%;
+    font-weight: 300;
+    }
+
+    #curtain #directions-text {
+    font-size: 24px;
+    top: 55%;
+    position: absolute;
+    }
+
+    #curtain #directionsparagraph {
+        font-size: 20px;
+        top: 60%;
+        position: absolute;
+        }
+
+
+
+/* code for the second page/ colored page:  */
+
+.colored-page:hover {
+    background: rgb(132, 242, 143); 
+
+}
+
+.button-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+
+button {
+    background-color: rgba(150, 69, 69, 0); /* Transparent background (0% opacity) */
+    color: #ffffff; /* Text color */
+    position: absolute;
+    height: 30px;
+    border: none
+}
+
+.colored-page {
+    width: 100%;
+    height: 100%;
+    background: #f2b3e7; /* Initial background color */
+    transition: background 5s ease; 
+
+}
+
+.textBox {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 40px;
+    font-family:'Times New Roman', Times, serif, sans-serif;
+    color: rgb(255, 255, 255);
+}
+
+.topLeft {
+    top: 41%;
+    right: 50%;
+}
+
+.topLeft img {
+    width: 40%; 
+    height: auto; 
+}
+
+
+.topRight {
+    top: 40%;
+    right: 10%;
+    width: 35%
+
+}
+
+.topRight img {
+    width: 50%; 
+    height: auto; 
+
+}
+
+.bottomLeft img {
+    width: 50%; 
+    height: auto; 
+}
+
+
+.bottomLeft {
+    bottom: 25%;
+    left: 11%;
+    width: 35%
+}
+
+.bottomRight img {
+    width: 50%; 
+    height: auto; 
+}
+
+.bottomRight {
+    bottom: 23%;
+    right: 10%;
+    width: 35%
+}
+
+
+  /* Type writer effect for the first page/ curtain page */
+
+  @keyframes typing1 {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: orange;
+    }
+  }
+
+
+  .typewriter .line1 {
+    overflow: hidden; /* Hide overflow to create a typing effect */
+    border-right: 0.15em solid orange; /* Create a cursor effect */
+    white-space: nowrap; /* Prevent text from wrapping */
+    margin: 0; /* Remove default margins */
+    letter-spacing: 0.15em; /* Adjust letter spacing for a retro look */
+    animation: typing1 5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  .typewriter .line3 {
+      overflow: hidden; 
+      border-right: 0.15em solid orange; 
+      white-space: nowrap;
+      margin: 0; 
+      letter-spacing: 0.15em; 
+      animation: typing1 5s steps(40, end), blink-caret 0.75s step-end infinite;
+
+  }
+
